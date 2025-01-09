@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Snack MacCholas</title>
     <style>
-        /* Estilo general */
         * {
             margin: 0;
             padding: 0;
@@ -18,22 +17,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: url('images/login.jpg') no-repeat center center/cover; /* Ruta local de la imagen */
+            background: url('images/login.jpg') no-repeat center center/cover; 
             position: relative;
         }
 
-        /* Capa oscura sobre la imagen */
         .background-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Oscurecer la imagen con transparencia */
-            z-index: -1; /* Asegurarse de que quede detrás del contenido */
+            background: rgba(0, 0, 0, 0.5); 
+            z-index: -1;
         }
 
-        /* Contenedor del formulario */
         .login-container {
             background: rgba(255, 255, 255, 0.9);
             padding: 40px 30px;
@@ -44,21 +41,18 @@
             text-align: center;
         }
 
-        /* Título del sistema */
         .login-container h1 {
             font-size: 28px;
             color: #333;
             margin-bottom: 20px;
         }
 
-        /* Subtítulo */
         .login-container h2 {
             font-size: 24px;
             color: #555;
             margin-bottom: 30px;
         }
 
-        /* Campos de entrada */
         .login-container input[type="text"],
         .login-container input[type="password"] {
             width: 100%;
@@ -69,7 +63,6 @@
             font-size: 16px;
         }
 
-        /* Botón de login */
         .login-container button {
             background-color: #1e4977;
             color: white;
@@ -92,7 +85,7 @@
     <div class="login-container">
         <h1>Snack MacCholas</h1>
         <h2>Iniciar Sesión</h2>
-        <form action="/login" method="POST">
+        <form action="{{ route('login') }}" method="POST">
             <!-- Campo de usuario -->
             @csrf
             <input type="text" name="email" placeholder="Nombre de usuario" required>

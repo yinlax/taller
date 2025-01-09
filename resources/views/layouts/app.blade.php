@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Sistema de Ventas')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
     <style>
         * {
             margin: 0;
@@ -41,12 +45,25 @@
             margin-left: 60px;
         }
 
-        header h1 {
-            font-size: 1.8rem;
+        .header-title {
+            text-decoration: none;
+            margin-left: 40px;
+            color: inherit;
+        }
+
+        #header h1 {
+            font-size: 24px;
+            margin: 0;
+            padding: 0px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            cursor: pointer; 
         }
+
+        #header h1 a {
+            color: inherit;
+        }
+
 
         header nav {
             display: flex;
@@ -100,6 +117,7 @@
 
         .sidebar h2 {
             font-size: 1.5rem;
+            letter-spacing: 3px;
             margin-bottom: 20px;
         }
 
@@ -109,7 +127,7 @@
         }
 
         .divider1 {
-            border-top: 3px solid #34495e;
+            border-top: 4px solid #34495e;
             margin: 10px 0;
         }
 
@@ -122,15 +140,21 @@
             transition: background 0.3s;
         }
 
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
         .sidebar a:hover {
             background-color: #34495e;
         }
 
         .sidebar .submenu {
-            margin-left: 15px;
+            margin-left: 25px;
             font-size: 0.9rem;
             display: none;
             flex-direction: column;
+            margin-top: 8px;
+            margin-bottom: 8px; 
         }
 
         .sidebar .submenu a {
@@ -151,6 +175,7 @@
             border: none;
             color: white;
             font-size: 1.2rem;
+            margin-left: 0px;
             margin-bottom: 10px;
             cursor: pointer;
         }
@@ -164,7 +189,7 @@
         }
 
         .main-content.collapsed {
-            margin-left: 60px;
+            margin-left: 0px;
         }
 
         footer {
@@ -229,39 +254,88 @@
 
 <body>
     <header id="header">
-        <h1><button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>Snack MacCholas - Sistema de Ventas</h1>
+        <h1>
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="{{ route('index') }}" class="header-title">
+                Snack MacCholas - Sistema de Ventas
+            </a>
+            
+        </h1>
         <nav>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="btn-logout">Cerrar sesión</button>
+                <button type="submit" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </form>
         </nav>
+        
     </header>
+    
 
     <div class="container">
         <aside class="sidebar" id="sidebar">
             <h2>Menú</h2>
             <div class="divider1"></div>
-            <a href="#roles">Roles</a>
-            <div class="divider"></div>
-            <a href="#usuarios" onclick="toggleSubmenu(event)">Usuarios</a>
+    
+            <!-- Menú Usuarios -->
+            <a href="#usuarios" onclick="toggleSubmenu(event)">
+                <i class="fas fa-users"></i> Usuarios
+                <i class="fas fa-chevron-down submenu-icon"></i>
+            </a>
             <div class="submenu" id="submenu-usuarios">
-                <a href="{{ route('usuarios.index') }}">Lista de Usuarios</a>
-                <a href="#asignar-funcion">Asignar Función</a>
+                <a href="{{ route('usuarios.index') }}">
+                    <i class="fas fa-list"></i> Lista de Usuarios
+                </a>
+                <a href="#">
+                    <i class="fas fa-user-plus"></i> Asignar Función
+                </a>
             </div>
             <div class="divider"></div>
-            <a href="#productos">Productos</a>
+    
+            <!-- Menú Productos -->
+            <a href="{{ route('productos.index') }}">
+                <i class="fas fa-hamburger"></i> Productos
+            </a>
             <div class="divider"></div>
-            <a href="#insumos">Insumos</a>
+    
+            <!-- Menú Insumos -->
+            <a href="{{ route('insumos.index') }}">
+                <i class="fas fa-utensils"></i> Insumos
+            </a>
             <div class="divider"></div>
-            <a href="#clientes">Clientes</a>
+    
+            <!-- Menú Clientes -->
+            <a href="{{ route('clientes.index') }}">
+                <i class="fas fa-users"></i> Clientes
+            </a>
             <div class="divider"></div>
-            <a href="#pedidos">Pedidos</a>
-            <a href="#confirmar-pedido">Confirmar Pedido</a>
+    
+            <!-- Menú Pedidos -->
+            <a href="#pedidos">
+                <i class="fas fa-clipboard-list"></i> Pedidos
+            </a>
             <div class="divider"></div>
-            <a href="#facturacion">Facturación</a>
-        </aside>
 
+            <!-- Confirmar Pedidos -->
+            <a href="#confirmar-pedido">
+                <i class="fas fa-check-circle"></i> Confirmar Pedido
+            </a>
+            <div class="divider"></div>
+    
+            <!-- Menú Facturación -->
+            <a href="#facturacion">
+                <i class="fas fa-file-invoice"></i> Facturación
+            </a>
+            <div class="divider"></div>
+
+            <!-- Reportes -->
+            <a href="{{ route('reportes.index') }}">
+                <i class="fas fa-chart-line"></i> Reportes
+            </a>
+            <div class="divider"></div>
+        </aside>
+    
         <main class="main-content" id="main-content">
             @yield('content') 
         </main>

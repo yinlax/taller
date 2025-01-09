@@ -15,7 +15,12 @@ class CreateUsuariosTable extends Migration
             $table->string('email', 30)->unique();
             $table->string('password', 255);
             $table->enum('estado', ['Activo', 'Inactivo', 'Bloqueado'])->default('Activo');
-            $table->timestamps(0);
+
+            // Clave foránea
+            $table->unsignedBigInteger('id_rol')->nullable();
+            $table->foreign('id_rol')->references('id_rol')->on('roles')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
